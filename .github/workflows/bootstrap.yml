@@ -1,0 +1,52 @@
+name: Bootstrap project
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.bootstrap/**'
+      - '.github/workflows/bootstrap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reassemble project archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/chunk-*.txt | tr -d '\n\r' > /tmp/project.b64
+          echo "93c7a6a9e0ec403c5ab59afc703b819942ed64afd90cd4a39a7aff8d5da9e32a  /tmp/project.b64" | sha256sum -c -
+          base64 --decode /tmp/project.b64 > /tmp/project.tar.gz
+          echo "4ecc007bbb35f7ade55ed7cdc063a33d4eee4c8f15b817e3345a577ae8c4f3b9  /tmp/project.tar.gz" | sha256sum -c -
+
+      - name: Populate repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -xzf /tmp/project.tar.gz -C .
+          rm -rf .bootstrap
+          rm -f .github/workflows/bootstrap.yml
+
+      - name: Commit project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Populate AI Red Team Harness project"
+          git push origin HEAD:main
