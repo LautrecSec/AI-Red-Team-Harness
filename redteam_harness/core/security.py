@@ -89,7 +89,7 @@ def validate_target_url(url: str, allow_private_networks: bool = False) -> None:
         raise ValueError(f"Unable to resolve target host: {parsed.hostname}") from exc
 
     for address in addresses:
-        ip = ipaddress.ip_address(address.split("%")[0])
+        ip = ipaddress.ip_address(str(address).split("%")[0])
         if ip in _BLOCKED_METADATA_IPS:
             raise ValueError("Cloud metadata endpoints are never valid red-team targets")
         if ip.is_link_local or ip.is_multicast or ip.is_reserved or ip.is_unspecified:
