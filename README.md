@@ -195,11 +195,3 @@ docs/                 Architecture, threat model and plugin guidance
 tests/                Unit and end-to-end orchestration tests
 .github/workflows/    CI and security scanning
 ```
-
-## Public portfolio note
-
-This is a **reference implementation**, not a dump of an employer environment. Organization-specific endpoints, credentials, prompts, policies, findings, architecture identifiers and customer information should stay out of the public repository.
-
-## License
-
-MIT
