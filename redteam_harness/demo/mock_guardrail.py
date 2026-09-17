@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
@@ -33,4 +34,5 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    ThreadingHTTPServer(("0.0.0.0", 8080), Handler).serve_forever()  # noqa: S104
+    host = os.environ.get("REDTEAM_DEMO_HOST", "127.0.0.1")
+    ThreadingHTTPServer((host, 8080), Handler).serve_forever()
