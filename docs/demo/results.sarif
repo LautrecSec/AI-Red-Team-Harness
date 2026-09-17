@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "AI Red Team Harness",
+          "version": "1.0.0"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "AIREDTEAM/mock/reconnaissance",
+          "level": "warning",
+          "message": {
+            "text": "Lab finding generated for demonstration"
+          },
+          "properties": {
+            "target": "local-mock-guardrail",
+            "attack_id": "mock-reconnaissance-2"
+          }
+        },
+        {
+          "ruleId": "AIREDTEAM/mock/initial_access",
+          "level": "warning",
+          "message": {
+            "text": "Lab finding generated for demonstration"
+          },
+          "properties": {
+            "target": "local-mock-guardrail",
+            "attack_id": "mock-initial_access-2"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+services:
+  mock-guardrail:
+    image: python:3.12-slim
+    working_dir: /workspace
+    command: ["python", "-m", "redteam_harness.demo.mock_guardrail"]
+    volumes:
+      - ../:/workspace:ro
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  harness:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    environment:
+      REDTEAM_ALLOW_PRIVATE_NETWORKS: "1"
+    depends_on:
+      - mock-guardrail
+    volumes:
+      - ../results:/app/results
+    command: ["run", "config/campaign.example.yaml", "--output-dir", "results"]
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
