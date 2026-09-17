@@ -4,7 +4,7 @@ import json
 import os
 import re
 import shutil
-import subprocess
+import subprocess  # noqa: S404  # nosec B404 - required for allow-listed scanners
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -102,7 +102,7 @@ class SafeSubprocessPlugin(AttackPlugin):
             # Execute the binary resolved from PATH, never an attacker-controlled path with the same basename.
             command[0] = executable_path
 
-            completed = subprocess.run(  # noqa: S603
+            completed = subprocess.run(  # noqa: S603  # nosec B603 - validated argv, shell=False
                 command,
                 check=False,
                 capture_output=True,
