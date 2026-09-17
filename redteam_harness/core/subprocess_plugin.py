@@ -58,7 +58,7 @@ class SafeSubprocessPlugin(AttackPlugin):
             )
         if command[0] != self.executable:
             raise ValueError(f"Command must start with the literal executable {self.executable!r}")
-        substitutions = {
+        substitutions: dict[str, str] = {
             "{endpoint}": target.endpoint,
             "{output}": str(output_file),
         }
