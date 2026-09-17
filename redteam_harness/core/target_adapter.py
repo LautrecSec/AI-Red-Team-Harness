@@ -51,7 +51,7 @@ class HttpJsonAdapter(TargetAdapter):
             headers["authorization"] = f"Bearer {token}"
 
         body = json.dumps({"prompt": prompt}).encode("utf-8")
-        request = urllib.request.Request(
+        request = urllib.request.Request(  # noqa: S310 - URL validated before request
             self.target.endpoint,
             data=body,
             headers=headers,
@@ -85,7 +85,7 @@ class OpenAICompatibleAdapter(HttpJsonAdapter):
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0,
         }
-        request = urllib.request.Request(
+        request = urllib.request.Request(  # noqa: S310 - URL validated before request
             self.target.endpoint,
             data=json.dumps(payload).encode("utf-8"),
             headers=headers,
