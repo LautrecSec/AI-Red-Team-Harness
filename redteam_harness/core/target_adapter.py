@@ -12,7 +12,7 @@ from .security import redact_data, redact_text, validate_target_url
 
 
 class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):  # type: ignore[no-untyped-def]
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
         raise urllib.error.HTTPError(
             req.full_url,
             code,
