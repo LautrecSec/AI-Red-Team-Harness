@@ -6,9 +6,7 @@ The project demonstrates a production-minded security architecture around Prompt
 
 > Designed for authorized defensive testing and security research.
 
-<p align="center">
-  <img src="docs/images/architecture.svg" alt="AI Red Team Harness reference architecture" width="100%">
-</p>
+<img width="1672" height="941" alt="AI Red Team Harness Design" src="https://github.com/user-attachments/assets/ca16d395-8a7f-4ab0-89dc-81dc8190edfe" />
 
 ## Why this exists
 
